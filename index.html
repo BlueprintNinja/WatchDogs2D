@@ -18,7 +18,10 @@
             await loadPyConfig(config);
             console.log("Pygame loaded.");
         }
-        loadPygame().catch(console.error);
+
+        loadPygame().catch(err => {
+            console.error("Failed to load Pygame:", err);
+        });
     </script>
 </body>
 </html>
