@@ -2,6 +2,7 @@ import pygame
 import sys
 import random
 from collections import deque
+import asyncio  # Import asyncio
 
 # Configuration constants
 CELL_SIZE = 80               # size of each cell in pixels
@@ -470,7 +471,7 @@ def get_grid_size_for_level(level):
     additional = (level - 1) // GRID_INCREASE_INTERVAL
     return min(MAX_GRID_SIZE, INITIAL_GRID_SIZE + additional)
 
-def main():
+async def main():  # Wrap the main game logic in an async function
     global hint_mode, hint_start_time, hint_last_update, solution_reached_time
     pygame.init()
     global terminal_messages, last_terminal_update
@@ -640,7 +641,8 @@ def main():
             draw_popup_notification(screen, "Access Denied!\nSystem Rebooting...", game_width, screen_height)
         
         pygame.display.flip()
+        await asyncio.sleep(0)  # Crucial for Pygbag: allows other tasks to run
         clock.tick(30)
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main()) # Run the main function with asyncio
