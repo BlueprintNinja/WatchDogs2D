@@ -21,16 +21,17 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install pygame-wasm
+      - name: Install pygbag
         run: |
           python -m pip install --upgrade pip
-          pip install pygame-wasm
+          pip install pygbag
 
       - name: Build game for web
         run: |
           mkdir dist
           cp game.py dist/
           cp index.html dist/
+          python -m pygbag --archive dist/
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
