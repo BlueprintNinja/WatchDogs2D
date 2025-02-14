@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pygame in Browser</title>
+    <title>WatchDogs2D</title>
 </head>
 <body>
     <h1>Loading Pygame...</h1>
@@ -12,8 +12,10 @@
         async function loadPygame() {
             console.log("Loading Pygame...");
             let config = {
-                "package": "",
-                "entrypoint": "game.py",  // Ensure this is the correct path
+                "package": "WatchDogs2D",  // Your project name
+                "entrypoint": "game.py",
+                "fullscreen": true,
+                "ume_block": false
             };
             await loadPyConfig(config);
             console.log("Pygame loaded.");
