@@ -1,1 +1,1 @@
-pygame-wasm
+pygame-ce
