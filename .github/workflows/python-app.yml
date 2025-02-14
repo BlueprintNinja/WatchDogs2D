@@ -1,0 +1,39 @@
+name: Deploy Pygame to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install pygame-wasm
+        run: |
+          python -m pip install --upgrade pip
+          pip install pygame-wasm
+
+      - name: Build game for web
+        run: |
+          mkdir dist
+          cp game.py dist/
+          cp index.html dist/
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: dist
